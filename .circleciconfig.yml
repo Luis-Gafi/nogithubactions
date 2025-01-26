@@ -1,0 +1,36 @@
+version: 2.1
+
+executors:
+  node-executor:
+    docker:
+      - image: cimg/node:16.14
+    working_directory: ~/repo
+
+jobs:
+  install_dependencies:
+    executor: node-executor
+    steps:
+      - checkout
+      - run:
+          name: Instalar dependencias
+          command: npm install
+      - run:
+          name: Instalar Playwright y sus navegadores
+          command: npx playwright install
+
+  test:
+    executor: node-executor
+    steps:
+      - checkout
+      - run:
+          name: Ejecutar pruebas con Playwright
+          command: npx playwright test
+
+workflows:
+  version: 2
+  test:
+    jobs:
+      - install_dependencies
+      - test:
+          requires:
+            - install_dependencies
