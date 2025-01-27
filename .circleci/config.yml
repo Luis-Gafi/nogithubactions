@@ -13,10 +13,9 @@ jobs:
       - checkout
       - run:
           name: Instalar dependencias
-          command: npm install
-      - run:
-          name: Instalar Playwright y sus navegadores
-          command: npx playwright install
+          command: |
+            npm install
+            npx playwright install
 
   test:
     executor: node-executor
