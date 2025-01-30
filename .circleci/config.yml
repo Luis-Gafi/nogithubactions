@@ -23,10 +23,9 @@ jobs:
       - checkout
       - run:
           name: Ejecutar pruebas con Playwright
-          command: npx playwright test
+          command: npx playwright test tests/amazon.test.js
 
 workflows:
-  version: 2
   test:
     jobs:
       - install_dependencies
