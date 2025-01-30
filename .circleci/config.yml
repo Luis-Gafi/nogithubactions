@@ -1,34 +1,27 @@
 version: 2.1
 
 executors:
-  node-executor:
+  playwright-executor:
     docker:
-      - image: cimg/node:16.14
+      - image: mcr.microsoft.com/playwright:v1.21.0-focal  # Docker image con Playwright preinstalado
     working_directory: ~/repo
 
 jobs:
-  install_dependencies:
-    executor: node-executor
+  test:
+    executor: playwright-executor
     steps:
-      - checkout
+      - checkout  # Esto descarga el código desde GitHub
       - run:
-          name: Instalar dependencias
+          name: Install dependencies
           command: |
             npm install
-            npx playwright install
-
-  test:
-    executor: node-executor
-    steps:
-      - checkout
       - run:
-          name: Ejecutar pruebas con Playwright
-          command: npx playwright test tests/amazon.test.js
+          name: Run tests
+          command: |
+            npm test
 
 workflows:
+  version: 2
   test:
     jobs:
-      - install_dependencies
-      - test:
-          requires:
-            - install_dependencies
+      - test

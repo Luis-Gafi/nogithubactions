@@ -1,5 +1,12 @@
 {
-  "dependencies": {
-    "@playwright/tests": "^1.0.0"
+  "name": "amazon-tests",
+  "version": "1.0.0",
+  "description": "Pruebas automáticas para Amazon usando Playwright",
+  "main": "index.js",
+  "scripts": {
+    "test": "playwright test"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.21.0"
   }
 }
