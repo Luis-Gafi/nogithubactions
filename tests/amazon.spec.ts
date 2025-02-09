@@ -44,7 +44,7 @@ test('Buscar, agregar y verificar en carrito', async ({ page }) => {
     await verifySearchResultsVisible(page);
 
     // Clic en la primera imagen del producto
-    await page.locator('img.s-image').nth(0).click();
+    await page.locator('img.s-image').nth(1).click();
 
     // Espera a que la página del producto se cargue
     await page.waitForSelector('#add-to-cart-button');
